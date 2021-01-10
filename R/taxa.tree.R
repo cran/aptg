@@ -9,12 +9,19 @@
 #' @import xml2
 #' @importFrom stats cophenetic
 #' @importFrom graphics plot
+#' @examples
+#' \dontrun{
+#' #Choose a list of string of species that you want to have in a phylogenetic tree.
+#' taxa.tree(species = c("Canis lupus", "Canis latrans", "Acer saccharum", "Castor canadensis",
+#' "Alces alces", "Acer rubrum",
+#' "Vulpes vulpes", "Salix babylonica", "Odocoileus virginianus", "Betula alleghaniensis",
+#' "Rangifer tarandus","Juniperus occidentalis"))}
 #' @export
 
 taxa.tree<- function(species){
 
 
-  tax.name<-tax_name(query=species ,get = c("class", "subkingdom"),db = "itis", verbose = F)
+  tax.name<-tax_name(sci=species ,get = c("class", "kingdom"), db = "ncbi", verbose = F)
   #subset  mammiferes
   subset.mamm<-tax.name[which(tax.name$class=="Mammalia"),]
   subset.mamm.sp<-subset.mamm$query
@@ -24,7 +31,7 @@ taxa.tree<- function(species){
   try(plot(tree.mamm, no.margin=TRUE), silent=T)
 
   #subset plantes
-  subset.plant<-tax.name[which(tax.name$subkingdom=="Viridiplantae"),]
+  subset.plant<-tax.name[which(tax.name$kingdom=="Viridiplantae"),]
   subset.plant.sp<-subset.plant$query
   try(tree.plant<-phylomatic(taxa=subset.plant.sp, storedtree ="zanne2014", get='POST', clean = T, db="apg",verbose = F),silent=T)
   #graphique

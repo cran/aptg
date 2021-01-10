@@ -1,7 +1,7 @@
 ---
 title: "Automatic Phylogenetic Tree Generator"
 author: "Christophe Benjamin"
-date: "March 28, 2017"
+date: "May 6th 2020"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{aptg}
@@ -26,23 +26,19 @@ library(aptg)
 
 ```
 
-The function needs  list of species name as an input and will give phylogenetic trees and distance matrices as an output. Let's do an example with a mixed list of mammal and angiosperm species. 
+The function needs a vector or list of strings of species name as an input and will give phylogenetic trees and distance matrices as an output. Let's do an example with a mixed list of mammal and angiosperm species. 
 
-```{r taxa.tree, message=FALSE}
-taxa.tree(c("Canis lupus", "Canis latrans", "Acer saccharum", "Castor canadensis", "Alces alces", "Acer rubrum", "Vulpes vulpes", "Salix babylonica", "Odocoileus virginianus", "Betula alleghaniensis", "Rangifer tarandus","Juniperus occidentalis", "Pinus strobus"))
+```{r taxa.tree, echo=TRUE, message=FALSE, results="hide"}
+taxa.tree(species = c("Canis lupus", "Canis latrans", "Acer saccharum", "Castor canadensis", "Alces alces", "Acer rubrum", "Vulpes vulpes", "Salix babylonica", "Odocoileus virginianus", "Betula alleghaniensis", "Rangifer tarandus","Juniperus occidentalis"))
 ```
 
-Here, _Salix babylonica_ have required an input to choose the good TSN number, if we omit it it is not include in the plot.  As you can see the taxa have been sorted by reference trees; mammals and angiosperms.  The distance matrices are also an output. 
+As you can see the taxa have been sorted by reference trees; mammals and angiosperms.  The distance matrices are also an output (not shown here). 
 
 ## downto.tree
 This function creates a phylogenetic tree from a taxon down to another one. For now, only the input species gives a result, but any higher taxon can be choosed. 
 
-```{r downto.tree, echo=TRUE, fig.height=4, fig.width=6, message=FALSE, warning=TRUE}
-downto.tree("Canidae", "species")
+```{r downto.tree, echo=-1,message=FALSE, results='hide', fig.height=6, fig.width=6}
+Sys.setenv(ENTREZ_KEY="2a3e497f3b180829c87cafafac7a122d9f09") #API key for NCBI
+downto.tree("Cervidae", "species")
 ```
 
-When running the code, this message would have appeared: 
-```{}
-NOTE: 10 taxa not matched: canidae/canis/canis_anthus, canidae/canis/canis_lupaster, canidae/dusicyon/dusicyon_australis, canidae/lycalopex/lycalopex_culpaeus, canidae/lycalopex/lycalopex_fulvipes, canidae/lycalopex/lycalopex_gymnocercus, canidae/lycalopex/lycalopex_sechurae, canidae/lycalopex/lycalopex_vetulus, canidae/vulpes/vulpes_lagopus, canidae/vulpes/vulpes_macrotis, ];
-```
-For esthetic purposes we omitted all the messages of the function, but when creating the tree, certain inputs from functions included in __downto.tree__ are not recognized in the reference supertrees. 

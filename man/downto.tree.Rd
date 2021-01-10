@@ -4,15 +4,23 @@
 \alias{downto.tree}
 \title{Hierarchical Tree Generator}
 \usage{
-downto.tree(taxon, downto, key = NULL)
+downto.tree(taxon, downto, key = NULL, db = "ncbi")
 }
 \arguments{
-\item{taxon}{The higher taxon from which the tree will start.}
+\item{taxon}{The higher taxon from which the tree will start. (i.e. Family, Genus)}
 
-\item{downto}{The lowest level of taxonomy wanted. Must be included in the argument taxon.}
+\item{downto}{The lowest level of taxonomy wanted. Must be lower than the one in taxon argument. Only species can be outputed from the Mammals tree.}
 
-\item{key}{API key.}
+\item{key}{API key. To create one use taxize::use_entrez().}
+
+\item{db}{Database used. Default is "ncbi". For possible datbases see ?taxize::downstream}
 }
 \description{
 Generates a phylogenetic tree from a taxon down to a chosen lower taxon.
+}
+\examples{
+\dontrun{
+#Choose a certain taxon and the level you want the tree to stop
+downto.tree("Cervidae", "species")
+}
 }

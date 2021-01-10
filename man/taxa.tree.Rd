@@ -12,3 +12,11 @@ taxa.tree(species)
 \description{
 Generates a tree and distance matrix from a list of species names. There are reference trees for mammals and angiosperms. The input species will be sorted by reference trees.
 }
+\examples{
+\dontrun{
+#Choose a list of string of species that you want to have in a phylogenetic tree.
+taxa.tree(species = c("Canis lupus", "Canis latrans", "Acer saccharum", "Castor canadensis",
+"Alces alces", "Acer rubrum",
+"Vulpes vulpes", "Salix babylonica", "Odocoileus virginianus", "Betula alleghaniensis",
+"Rangifer tarandus","Juniperus occidentalis"))}
+}
